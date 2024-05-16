@@ -1,0 +1,11 @@
+Hello world
+<br>
+{{pst}}
+
+<br>
+
+{% for post in pst%}
+<a href="/post/{{post.id}}">{{post.title}}</a>
+         {{post.text}}
+  <br>
+{%endfor%}

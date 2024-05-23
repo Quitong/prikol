@@ -10,9 +10,29 @@
 <body>
 {{post.title}}<br>
 {{post.text}}<br>
+
+{%if user.is_authenticated%}
+<form method="POST" class="post-form">
+    {%csrf_token%}
+    {{form.as_p}}
+    <button type="submit" class="save btn btn-default">Save</button>
+</form>
+{%else%}
+<br>for shitposting- pls authenticated
+{%endif%}
+{{user.username}}
+<br>
+{{pst}}
+
+<br>
+
 {% for com in comments%}
+<p>Comments - {{com.id}}:</p>
 <p>{{com.text}}</p>
 {%endfor%}
+
+
+
 
 </body>
 </html>

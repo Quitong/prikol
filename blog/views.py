@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-from blog.models import Post, Comment
+from blog.models import Post, Comment, Quiz
 from blog.templates.forms import PostForm, CommentForm
 
 
@@ -52,7 +52,7 @@ def post_view(request,pk):
             form = CommentForm(data)
             if form.is_valid():
                 comment = form.save(commit=False)
-                # post.author = request.user
+                comment.author = request.user
                 comment.to_post = post
                 comment.save()
 
@@ -65,3 +65,22 @@ def post_view(request,pk):
                 'user':request.user,
                 }
     )
+
+def quiz_list(request,):
+    quizes= Quiz.objects.all()
+    return render(
+        request,
+        'quizes_list.html',
+        {'quizes': quizes,
+         })
+
+def quiz_detal(request,pk):
+    quiz = Quiz.objects.filter(id=pk).first()
+    quiz.questions = quiz.question_set.all()
+    for question in quiz.questions:
+        question.answers = question.answer_set.all()
+
+    return render(request,"quiz_detail.html",
+                  {
+                      'quiz': quiz
+                  })

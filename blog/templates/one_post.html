@@ -8,6 +8,8 @@
     <title>Document</title>
 </head>
 <body>
+author: <br>
+{{post.author.username}}<br>
 {{post.title}}<br>
 {{post.text}}<br>
 
@@ -27,7 +29,7 @@
 <br>
 
 {% for com in comments%}
-<p>Comments - {{com.id}}:</p>
+<p>Comments - {{com.id}} from {{com.author}}:</p>
 <p>{{com.text}}</p>
 {%endfor%}
 

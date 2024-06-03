@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 from blog.views import main_view, post_view, quiz_list, quiz_detal
+from shop.views import cat_goods_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +25,5 @@ urlpatterns = [
     path('post/<int:pk>/', post_view),
     path('quiz/', quiz_list),
     path('quiz/<int:pk>/', quiz_detal),
+    path ('shop/goods/category_<int:cat_id>/goods_<int:goods_id>/',cat_goods_view)
 ]

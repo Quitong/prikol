@@ -1,12 +1,14 @@
-from django.db import models
+from django.db.models import CharField, DecimalField, Model, CASCADE, ForeignKey
 
 
+class Category(Model):
+    name = CharField(max_length=200)
 
-class Category(models.Model):
-    name = {}
 
+class Goods(Model):
+    name = CharField(max_length=200)
+    cost = DecimalField(max_digits=19, decimal_places=2)
+    category = ForeignKey('Category',CASCADE)
 
-class Goods(models.Model):
-    name = models.CharField(max_length=200)
-    cost = models.DecimalField(max_digits=5, decimal_places=2)
-    category = models.ForeignKey('Category', models.CASCADE)
+    def __str__(self):
+        return 'Goods'+self.name
